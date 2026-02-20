@@ -32,7 +32,7 @@ public class MyFirstTimer extends GraphicsProgram implements ActionListener {
         }
     }
 
-    // Launcher for modern Eclipse/JDK (applets don't work on Java 25)
+    
     public static void main(String[] args) {
         new MyFirstTimer().start();
     }
