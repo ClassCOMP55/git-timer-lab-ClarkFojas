@@ -1,23 +1,39 @@
 import acm.graphics.*;
 import acm.program.*;
 
-public class MyFirstTimer extends GraphicsProgram {
-	public static final int PROGRAM_HEIGHT = 600;
-	public static final int PROGRAM_WIDTH = 800;
-	public static final int MAX_STEPS = 20;
-	private GLabel myLabel;
+import javax.swing.*;
+import java.awt.event.*;
 
-	public void init() {
-		setSize(PROGRAM_WIDTH, PROGRAM_HEIGHT);
-		requestFocus();
-	}
-	
-	public void run() {
-		myLabel = new GLabel("# of times called?", 0, 100);
-		add(myLabel);
-	}
-	
-	public static void main(String[] args) {
-		new MyFirstTimer().start();
-	}
+public class MyFirstTimer extends GraphicsProgram implements ActionListener {
+
+    private GLabel myLabel;
+    private int numTimes;
+    private Timer t;
+
+    public void run() {
+        myLabel = new GLabel("# of times called?", 20, 40);
+        add(myLabel);
+
+        numTimes = 0;
+
+        t = new Timer(1000, this);
+        t.setInitialDelay(3000);
+        t.start();
+    }
+
+    public void actionPerformed(ActionEvent e) {
+        numTimes++;
+
+        myLabel.move(5, 0);
+        myLabel.setLabel("times called? " + numTimes);
+
+        if (numTimes == 10) {
+            t.stop();
+        }
+    }
+
+    // Launcher for modern Eclipse/JDK (applets don't work on Java 25)
+    public static void main(String[] args) {
+        new MyFirstTimer().start();
+    }
 }
